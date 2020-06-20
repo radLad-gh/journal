@@ -32,8 +32,7 @@ full_datetime = initTime[slice_object_full]
 date = initTime[slice_object_date]
 year = initTime[slice_object_year]
 month = initTime[slice_object_month]
-print(f'Run start datetime: {full_datetime}')
-print(f'year: {year}, month: {month}')
+print(f'Datetime: {full_datetime}\r\n')
 
 # check exist year/month dirs, create if not exist.
 if not os.path.isdir(f'{path}\\Journal'):
