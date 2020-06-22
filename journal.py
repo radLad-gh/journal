@@ -9,6 +9,7 @@
 # Proper appending to file with contents of STDIN
 
 import os
+import time
 from datetime import datetime
 
 # Init Input Validation
@@ -18,54 +19,57 @@ from datetime import datetime
 # Else, create and append content, writing with time at head of line.
 # Output
 
-path = os.getcwd()
 
-# Time mod for head of entry
-initTime = str(datetime.now())
+def getTime():
+    # Time mod for head of entry
+    init_time = str(datetime.now())
 
-slice_object_full = slice(16)
-slice_object_date = slice(10)
-slice_object_year = slice(4)
-slice_object_month = slice(5, 7)
+    slice_object_full = slice(16)
+    full_datetime = init_time[slice_object_full]
 
-full_datetime = initTime[slice_object_full]
-date = initTime[slice_object_date]
-year = initTime[slice_object_year]
-month = initTime[slice_object_month]
-print(f'Datetime: {full_datetime}\r\n')
+    return full_datetime
 
-# check exist year/month dirs, create if not exist.
-if not os.path.isdir(f'{path}\\Journal'):
-    os.mkdir(f'{path}\\Journal\\')
-    if not os.path.isdir(f'{path}\\Journal\\{month}\\'):
-        os.mkdir(f'{path}\\Journal\\{month}\\')
+
+def write():
+    full_datetime = getTime().split(' ')
+    date = full_datetime[0].split('-')
+
+    # check exist year/month dirs, create if not exist.
+    path = os.getcwd()
+    target_path = f'{path}\\Journal\\{date[0]}\\{date[1]}\\'
+    if not os.path.isdir(target_path):
+        os.mkdir(target_path)
     else:
         pass
+
+    keywords = input(f'Entry Keywords:\n>>')
+    print(f'Date: {full_datetime[0]} Time: {full_datetime[1]}\r\n')
+    content = (input(f'Tell me EVERYTHING:\n>> '))
+
+    line_length = 70
+    justified_content = [content[i:i+line_length] for i in range(0, len(content), line_length)]
+
+    file_path = f'{path}\\Journal\\{date[0]}\\{date[1]}\\{full_datetime[0]}.txt'
+    with open(file_path, 'a+') as f:
+        f.write(f'{full_datetime[0]}, {full_datetime[1]}, Keywords:{[keywords]}\n')
+        for line in justified_content:
+            f.write(f'{line}\n')
+        f.write('\r\n')
+
+
+def search():
+    kw = input("What word would you like to find in the records: ")
+    print('\r\nThank you. One moment, please...')
+    time.sleep(1)
+
+
+res = int(input('Select a number to proceed:\r\n0. New\r\n1. Search\r\n\r\n>> '))
+if res:
+    print('This function is currently under servicing and will be available soon. \r\nThank you for your support.')
+    quit()
 else:
-    pass
-
-# Generator if want to change the list comprehension method
-# def linesplit(s, n):
-#     for start in range(0, len(s), n):
-#         yield s[start:start+n]
-
-
-content = (input(f'Tell me EVERYTHING:\n>> '))
-lineLength = 70
-justifiedContent = [content[i:i+lineLength] for i in range(0, len(content), lineLength)]
-
-filepath = f'{path}\\Journal\\{month}\\{date}.txt'
-with open(filepath, 'a+') as f:
-    f.write(f'{full_datetime}\n')
-    for line in justifiedContent:
-        f.write(f'{line}\n')
-    f.write('\r\n')
+    write()
 
 # This code was written by Justice Smith
 # Have Fun, use it responsibly.
-
-
-
-
-
 
