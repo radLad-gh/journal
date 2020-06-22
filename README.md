@@ -1,7 +1,6 @@
 # Journal
 This is a Python Journal Script for Windows to append information to a DirTree.
 
-
 # Project Summary:
  command-line prompt for entering information that is appended to a day-specific .txt
  file at a designated location.
@@ -16,17 +15,14 @@ The search function currently has no implementation and simply returns a makeshi
 'Out of Order' message. 
 
 I plan to have it:
- Search by:
-  -year
-  -month
-  -day(of the month or of the week)
-  -time span(between a and b)
- Filter by:
-  -date
-  -time of day
-  -other words in the text for context/mood?
-
+1. Search by:
+   [year, month, day(of the month or week), time span(between a and b)]
+2. Filter by:
+   [date, time of day, other words in text]
+   
 I have no knowledge of how to search through files but plan to learn and implement 
 at least a basic functionality on or before 6.25.2020 to allow for at minimum a single 
 keyword search. 
+
+
 
