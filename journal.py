@@ -42,9 +42,9 @@ def write():
     else:
         pass
 
-    keywords = input(f'Entry Keywords:\n>>')
-    print(f'Date: {full_datetime[0]} Time: {full_datetime[1]}\r\n')
-    content = (input(f'Tell me EVERYTHING:\n>> '))
+    keywords = input(f' Entry Keywords:\n>>')
+    print(f' Date: {full_datetime[0]} Time: {full_datetime[1]}\r\n')
+    content = (input(f' Tell me EVERYTHING:\n>> '))
 
     line_length = 70
     justified_content = [content[i:i+line_length] for i in range(0, len(content), line_length)]
@@ -57,19 +57,57 @@ def write():
         f.write('\r\n')
 
 
-def search():
-    kw = input("What word would you like to find in the records: ")
-    print('\r\nThank you. One moment, please...')
-    time.sleep(1)
+def fileScraper():
+    file_list = []
+
+    year = input(" Which YEAR would you like to search:  <FORMAT: YYYY>\n> ")
+    month = input(" Which MONTH would you like to search:  <FORMAT: MM>\n> ")
+    kw = input(" What word would you like to find in the records: \n> ")
+    print('\r\n Thank you. One moment, please...')
+
+    path = f'{os.getcwd()}\\Journal\\{year}\\{month}\\'
+
+    for file in os.listdir(path):
+        with open(f'{path}\\{file}') as f:
+            if kw in f.read():
+                file_list.append(file)
+
+    return file_list, path
 
 
-res = int(input('Select a number to proceed:\r\n0. New\r\n1. Search\r\n\r\n>> '))
+def searchUX():
+    file_list, path = fileScraper()
+    print(f'There were {len(file_list)} files that contained the keyword.\n')
+    if len(file_list) > 0:
+        for file in file_list:
+            print(f'\t{file}')
+        print()
+        read_res = input(f'Would you like to read the files listed(Y/N)?\n> ')
+        if read_res.lower() == 'y':
+            for file in file_list:
+                # command prompt piping to open the files with keyword matches
+                os.system(f'cmd /c "{path}\\{file}"')
+            search_again = input('Would you like to search again(Y/N)?\n> ')
+            if search_again.lower() == 'y':
+                searchUX()
+            else:
+                quit()
+        else:
+            quit()
+
+
+res = int(input(' Select a number to proceed:\r\n0. New\r\n1. Search\r\n\r\n> '))
 if res:
-    print('This function is currently under servicing and will be available soon. \r\nThank you for your support.')
-    quit()
+    searchUX()
 else:
     write()
 
 # This code was written by Justice Smith
 # Have Fun, use it responsibly.
+
+# To implement a search function, I can:
+# Designate a target directory and then iterate through the files for keywords(1 first)
+# This requires parsing the keywords list in each entry(regex?)
+# Return entry path or contents?
+
 
