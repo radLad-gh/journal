@@ -12,7 +12,7 @@ you call the file from the default location of command prompt.
  
 ## Functions:
 Write():\
- Allows you to create an entry that is filed by date in the appropriate directory branch\
+ Allows you to create an entry that is filed by date in the appropriate directory branch.
 
 Search():
  Allows you to search files within a specified month for a chosen keyword. It then \
@@ -29,9 +29,9 @@ I plan to have it:
 2. Filter by:\
    [date, time of day, other words in text]
    
-I have no knowledge of how to search through files but plan to learn and implement 
-at least a basic functionality on or before 6.25.2020 to allow for at minimum a single 
-keyword search. 
+~~I have no knowledge of how to search through files but plan to learn and implement \
+at least a basic functionality on or before 6.25.2020 to allow for at minimum a single \
+keyword search.~~
 
 ## Milestones: 
 6.25.2020: Added search function that allows for single keyword lookups. 
