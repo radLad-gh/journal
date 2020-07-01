@@ -36,5 +36,8 @@ keyword search.~~
 ## Milestones: 
 6.25.2020: Added search function that allows for single keyword lookups. 
 
+## Issues:
+A user has identified a directory creation issue that crashes the program. I am working on a solution that should be done by tomorrow 8pm EST.
+
 
 
